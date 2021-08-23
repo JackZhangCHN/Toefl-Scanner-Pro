@@ -2,6 +2,9 @@
 
 TOEFL NEEA 托福空余考位自动扫描脚本，支持自定义城市、时间。
 
+**+在原版基础上添加：反复查询，查询到后播放声音**
+
+
 
 
 ## 🤖️使用方法
@@ -33,10 +36,10 @@ TOEFL NEEA 托福空余考位自动扫描脚本，支持自定义城市、时间
 
 ```javascript
 //在这里加入你需要选择的城市。
-var city_choose = ["武汉","长沙","南昌"]
+var city_choose = ["杭州"]
 
 //在这里加入你需要选择的时间[start_time,end_time]。
-var time_start_end = ["2021-4-10","2021-10-30"]
+var time_start_end = ["2021-9-17","2021-9-19"]
 
 //搜索全部时间
 //var time_start_end = ["2000-4-10","2099-10-30"]
@@ -71,7 +74,16 @@ async function Scanner(city_choose, all) {
                                         city.options[i].innerText,
                                         day.options[j].innerText,
                                         tb.rows[row].cells[1].innerText)
-}}}}}}}}}
+									
+					play()
+					for (countingg = 1; countingg <= 49; countingg++) {
+						play()
+						await sleep(1200);
+					}
+							
+										
+				}
+}}}}}}}}
 
 
 function compare(date){
@@ -83,11 +95,24 @@ function compare(date){
     return cur.getTime() >= start.getTime() && cur.getTime() <= end.getTime()
 }
 
-//搜索指定城市
-//Scanner(city_choose, false)
+function play() {
 
+	var audio = new Audio('https://example.com/warning.mp3');
+	audio.play()
+	
+	
+
+}
+//搜索指定城市
+async function go(){
+for (lloop = 1; lloop <= 9999; lloop++){
+	Scanner(city_choose, false)
+	await sleep(1*(60*1000))//1分钟一个循环
+}
+}
+ go()
 //搜索全部城市
-Scanner(city_choose, true)
+//Scanner(city_choose, true)
 ```
 
 - 输出结果
@@ -97,4 +122,7 @@ Scanner(city_choose, true)
 ## 🎉鸣谢
 
 感谢[NEEA_TOEFL_AUTOMATOR](https://github.com/Augustpan/NEEA_TOEFL_AUTOMATOR)的启发，本项目在此基础上新增了城市、时间选择功能。
+
+----
+感谢[url] https://github.com/AlexFanw/Toefl-Scanner-Pro [/url]的原版，本Fork在此之上添加了反复查询，查询到之后播放声音，添加了易用性。
 
